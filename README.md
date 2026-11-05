@@ -4,7 +4,7 @@
 
 Общие инструменты команды для работы с Jira и GitLab.
 
-## Routine · 0.1.0 alpha
+## Routine · 0.1.1 alpha
 
 <img src="plugins/routine/assets/icon.png" width="128" alt="Routine">
 
@@ -19,7 +19,7 @@
 
 [Требования и устройство плагина](plugins/routine/README.md) · [Контракт проекта](plugins/routine/references/project-contract.md) · [Шаблоны](plugins/routine/templates/README.md)
 
-Настройки проекта: `.harness/workflow/project.yaml`. Код, коммиты и push остаются у проектных инструментов. Для Jira нужны официальный Atlassian MCP и TWG, для GitLab — настроенный glab. Плагин не устанавливает эти зависимости.
+Настройки проекта: `.harness/routine/project.yaml`. Код, коммиты и push остаются у проектных инструментов. Для Jira нужны официальный Atlassian MCP и TWG, для GitLab — настроенный glab. Плагин не устанавливает эти зависимости.
 
 ## Разработка
 

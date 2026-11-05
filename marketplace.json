@@ -6,7 +6,7 @@
       "name": "routine",
       "source": "./plugins/routine",
       "description": "Согласуемая настройка проекта и сопровождение Jira/MR/review",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "developer-tools",
       "icon": "https://raw.githubusercontent.com/stovberpv/finam-zcode-marketplace/main/plugins/routine/assets/icon.png"
     }

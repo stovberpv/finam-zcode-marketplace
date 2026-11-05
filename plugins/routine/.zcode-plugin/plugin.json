@@ -1,6 +1,6 @@
 {
   "name": "routine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Общий стандарт Jira, описаний MR и результатов проектного ревью",
   "skills": "skills",
   "commands": "commands"

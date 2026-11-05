@@ -82,7 +82,8 @@ class PackageTests(unittest.TestCase):
         self.assertNotEqual(executor['source'],'.zcode/commands/routine_review.md')
 
     def test_archive_is_relocatable_and_matches_sources(self):
-        archive=ROOT/'dist/routine-0.1.0.zip'
+        version=json.loads((PLUGIN/'.zcode-plugin/plugin.json').read_text())['version']
+        archive=ROOT/f'dist/routine-{version}.zip'
         self.assertTrue(archive.exists(),'Run scripts/build_plugin.py first')
         with tempfile.TemporaryDirectory() as temp,zipfile.ZipFile(archive) as z:
             self.assertIsNone(z.testzip())

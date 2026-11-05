@@ -20,8 +20,8 @@ references:
     - id: architecture
       path: docs/architecture.md
       description: Существующая архитектурная документация, оставленная на месте
-    - id: workflow-index
-      path: .harness/workflow/index.md
+    - id: routine-index
+      path: .harness/routine/index.md
       description: Согласованный индекс опорных точек
   rules:
     - id: code-style
@@ -29,7 +29,7 @@ references:
       scope: Исходный код сервиса
       status: accepted
     - id: testing
-      path: .harness/workflow/rules/testing.md
+      path: .harness/routine/rules/testing.md
       scope: Автоматические тесты
       status: draft                  # предложение, ещё не обязательное требование
 quality:
@@ -63,7 +63,7 @@ quality:
 review:
   executor:
     kind: instructions
-    source: .harness/workflow/review.md
+    source: .harness/routine/review.md
     invocation:
       mode: delegate_instructions
       target: general-purpose
@@ -73,5 +73,5 @@ review:
         Получить результат в основном разговоре; не исправлять код и не публиковать
         комментарии из подагента.
     result:
-      format: workflow-review-v1
+      format: routine-review-v1
       delivery: conversation
