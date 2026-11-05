@@ -1,0 +1,30 @@
+# Шаблон. После инициализации: <repository>/.harness/workflow/project.yaml
+# Все локальные пути и cwd относительно корня репозитория, НЕ этого YAML.
+schema_version: 1
+standard_version: "0.1"
+
+project:
+  id: null                         # устойчивое имя проекта, заполняется при настройке
+  name: null
+
+jira:
+  site_url: null
+  defaults:                        # для новой работы; существующая задача читается из Jira
+    project_key: null
+    epic_url: null
+    parent_url: null                # необязательно; не глобальная «текущая задача»
+
+gitlab:
+  repository_url: null              # URL проекта без credentials
+  remote: origin
+  default_target_branch: null       # для нового MR; existing MR задаёт свой target
+
+references:
+  documentation: []                # [{id, path, description}]
+  rules: []                        # [{id, path, scope, status}]; accepted | draft
+
+quality:
+  checks: []                       # только реально найденные / согласованные проверки
+
+review:
+  executor: null                    # null = проектное ревью не настроено

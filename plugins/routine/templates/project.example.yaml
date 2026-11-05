@@ -1,0 +1,77 @@
+# Учебный пример; адреса, команды и файлы не описывают реальный проект.
+# Заполняется по фактам и решениям пользователя, а не копируется вслепую.
+schema_version: 1
+standard_version: "0.1"
+project:
+  id: example-service
+  name: Пример сервиса
+jira:
+  site_url: https://example.atlassian.net
+  defaults:
+    project_key: DEMO
+    epic_url: https://example.atlassian.net/browse/DEMO-100
+    parent_url: null
+gitlab:
+  repository_url: https://gitlab.example.com/team/example-service
+  remote: origin
+  default_target_branch: main
+references:
+  documentation:
+    - id: architecture
+      path: docs/architecture.md
+      description: Существующая архитектурная документация, оставленная на месте
+    - id: workflow-index
+      path: .harness/workflow/index.md
+      description: Согласованный индекс опорных точек
+  rules:
+    - id: code-style
+      path: docs/code-style.md
+      scope: Исходный код сервиса
+      status: accepted
+    - id: testing
+      path: .harness/workflow/rules/testing.md
+      scope: Автоматические тесты
+      status: draft                  # предложение, ещё не обязательное требование
+quality:
+  checks:
+    - id: lint
+      purpose: Проверить стиль исходного кода
+      required_when: Изменён код или конфигурация линтера
+      execution:
+        kind: command
+        cwd: .
+        command: npm run lint
+      success: Код завершения 0
+      evidence: Команда, код завершения и вывод запуска
+    - id: unit
+      purpose: Проверить поведение модулей
+      required_when: Изменена логика или её тесты
+      execution:
+        kind: command
+        cwd: .
+        command: npm test -- --run
+      success: Выбранные тесты выполнены и прошли; отсутствие тестов не равно PASS
+      evidence: Команда, список выполненных тестов и результат
+    - id: manual-scenario
+      purpose: Проверить пользовательский сценарий
+      required_when: Изменено поведение интерфейса
+      execution:
+        kind: manual
+        instructions_path: docs/testing/user-scenario.md
+      success: Все ожидаемые результаты сценария подтверждены
+      evidence: Исполнитель, среда, шаги, результаты и ограничения
+review:
+  executor:
+    kind: instructions
+    source: .harness/workflow/review.md
+    invocation:
+      mode: delegate_instructions
+      target: general-purpose
+      instructions: >-
+        Делегировать отдельному подагенту чтение source и перечисленных правил
+        проекта. Передать контекст задачи, base/head SHA, diff и результаты проверок.
+        Получить результат в основном разговоре; не исправлять код и не публиковать
+        комментарии из подагента.
+    result:
+      format: workflow-review-v1
+      delivery: conversation
