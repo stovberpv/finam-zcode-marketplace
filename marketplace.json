@@ -1,18 +1,22 @@
 {
   "name": "finam",
-  "description": "Командный стандарт Jira, описаний MR и проектного ревью",
+  "description": "Finam Engineering. Плагины, которые превращают ИИ-агентов в инструменты вашей команды. Готовые команды, интеграции и рабочие подходы для повседневных задач — от разработки и анализа до документации и автоматизации. Выбирайте нужные возможности и подключайте их к своему проекту.",
   "plugins": [
     {
       "name": "routine",
       "source": "./plugins/routine",
-      "description": "Согласуемая настройка проекта и сопровождение Jira/MR/review",
-      "version": "0.1.1",
+      "description": "Вы занимаетесь разработкой — Routine помогает оформить результат. Создаёт и обновляет задачи Jira, готовит описания merge request, запускает проектное ревью и оформляет его результаты по стандартам команды. Начать можно в любой момент: с идеи, существующей задачи или уже написанного кода. Routine собирает контекст проекта и уточняет недостающее, чтобы вам не приходилось каждый раз заново объяснять процесс и переносить данные вручную.",
+      "version": "0.2.0",
       "category": "developer-tools",
-      "icon": "https://raw.githubusercontent.com/stovberpv/finam-zcode-marketplace/main/plugins/routine/assets/icon.png"
+      "icon": "https://raw.githubusercontent.com/stovberpv/finam-zcode-marketplace/main/plugins/routine/assets/icon.png",
+      "displayName": "Routine",
+      "author": {
+        "name": "Finam Engineering"
+      }
     }
   ],
   "owner": {
-    "name": "Finam",
+    "name": "Finam Engineering",
     "url": "https://github.com/stovberpv/finam-zcode-marketplace"
   }
 }

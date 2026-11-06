@@ -26,28 +26,25 @@ class PackageTests(unittest.TestCase):
         self.assertEqual((ROOT/entry['source']).resolve(),PLUGIN)
         meta = json.loads((PLUGIN/'.zcode-plugin/plugin.json').read_text())
         self.assertEqual((entry['name'],entry['version']),(meta['name'],meta['version']))
-        for field in ('skills','commands'):
+        for field in ('commands',):
             self.assertTrue((PLUGIN/meta[field]).is_dir())
         for field in ('dependencies','hooks','mcpServers'):
             self.assertNotIn(field,meta)
         self.assertFalse((PLUGIN/'.mcp.json').exists())
 
-    def test_skill_and_command_discovery(self):
-        skills = list((PLUGIN/'skills').glob('*/SKILL.md'))
-        self.assertEqual(len(skills),2)
-        names=set()
-        for p in skills:
-            fm,body = frontmatter(p)
-            self.assertEqual(fm['name'],p.parent.name)
-            self.assertRegex(fm['name'],r'^[a-z0-9-]+$')
-            self.assertTrue(1<=len(fm['description'])<=1024)
-            self.assertLess(len(body.encode()),100_000)
-            names.add(fm['name'])
-        for p in (PLUGIN/'commands').glob('*.md'):
+    def test_command_discovery(self):
+        meta=json.loads((PLUGIN/'.zcode-plugin/plugin.json').read_text())
+        self.assertNotIn('skills',meta)
+        self.assertFalse((PLUGIN/'skills').exists())
+        commands=list((PLUGIN/'commands').glob('*.md'))
+        self.assertEqual({p.stem for p in commands},{'routine','routine_setup'})
+        for p in commands:
             fm,body=frontmatter(p)
-            self.assertRegex(p.stem,r'^[a-z0-9][a-z0-9_:-]{0,63}$')
-            self.assertIn(fm['skills'],names)
+            self.assertTrue(fm['description'])
+            self.assertNotIn('skills',fm)
             self.assertIn('$ARGUMENTS',body)
+            self.assertIn('.harness/routine/project.yaml',body)
+            self.assertIn('../references/project-contract.md',body)
 
     def test_all_bundled_markdown_resources_resolve_inside_package(self):
         for p in PLUGIN.rglob('*.md'):
